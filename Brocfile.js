@@ -2,8 +2,15 @@
 /* global require, module */
 
 var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
-
+var Funnel = require('broccoli-funnel');
 var app = new EmberAddon();
+
+var tree = new Funnel('./app', {
+    srcDir : 'workers',
+    destDir: './assets/workers',
+    include: ['*.js'],
+    allowEmpty : true
+});
 
 // Use `app.import` to add additional libraries to the generated
 // output files.
@@ -18,4 +25,4 @@ var app = new EmberAddon();
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
 
-module.exports = app.toTree();
+module.exports = app.toTree(tree);
